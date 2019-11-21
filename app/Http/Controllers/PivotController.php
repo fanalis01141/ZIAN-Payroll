@@ -92,7 +92,8 @@ class PivotController extends Controller
         $showDep = Department::distinct()->get('department_name');
         $showPos = Department::all();
         $deductions = Deduction::where('emp_id', $id)->first();
-        return view('admin.employee', compact('user','sched','in','out','day','deductions','showDep','showPos'));
+        $sched = Schedule::where('emp_id', $id)->first();
+        return view('admin.employee', compact('user','sched','in','out','day','deductions','showDep','showPos','sched'));
     }
 
     /**
@@ -116,7 +117,7 @@ class PivotController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd ($request);
+        // dd ($request);
         User::where('id', $id)->update([
             'name' => $request->name,
             'username' => $request->username,
@@ -126,6 +127,27 @@ class PivotController extends Controller
             'position' => $request->position,
             'weeks_of_training' => $request->weeks_of_training,
         ]);
+        
+        $off = "";
+        if($request->new_salary_type == 'FIXED'){
+            $off = 'SUN';
+        }else{
+            $off = $request->new_dayoff;
+        }
+        Schedule::where('emp_id', $id)->update([
+                
+            'dayoff' => $off,
+            'req_in' => $request->new_timein == null ? 'NA' : $request->new_timein,
+            'req_out' => $request->new_timeout == null ? 'NA' : $request->new_timeout
+        ]);
+
+        Deduction::where('emp_id', $id)->update([
+            'phic' => $request->phic,
+            'sss' => $request->sss,
+            'pagibig' => $request->pagibig
+        ]);
+
+        return redirect()->back()->with('success', 'Edited details of ' . $request->name);
 
     }
 

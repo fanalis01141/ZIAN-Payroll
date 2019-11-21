@@ -8,6 +8,8 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+
 
         <!-- Styles -->
         <style>
@@ -83,6 +85,7 @@
                 <div class="title">
                      ZIAN <hr>
                     <p style="font-size:2rem; letter-spacing:7px;">PAYROLL</p>
+                    <img src="{{ asset('images/pay.svg') }}" alt="">
                 </div>
 
             </div>

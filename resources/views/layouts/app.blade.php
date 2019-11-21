@@ -25,7 +25,7 @@
 
 
 </head>
-<body class="raleway">
+<body class="raleway bodygrad">
 
     <div id="app">
 

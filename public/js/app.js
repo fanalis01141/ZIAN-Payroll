@@ -49525,6 +49525,18 @@ $(".btn-edit-duduction").click(function () {
 });
 $(document).ready(function () {
   var div = document.getElementById("edit"); // div.style.display = "none";
+
+  var sal = $("#new_salary_type").val();
+
+  if (sal == "HOURLY") {
+    $("#schedule").show();
+    $('#new_timein').prop('required', 'required');
+    $('#new_timeout').prop('required', 'required');
+  } else if (sal == "FIXED") {
+    $("#schedule").hide();
+    $('#new_timein').prop('required', '');
+    $('#new_timeout').prop('required', '');
+  }
 });
 $('.table tbody').on('click', '.btn', function () {
   var row = $(this).closest('tr');

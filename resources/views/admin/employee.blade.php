@@ -6,8 +6,8 @@
 
         @if (session('success'))
             <div class="alert alert-success" role="alert">
+                <i class="far fa-check-circle"></i>
                 {{ session('success') }}
-                <p>Please set the employee's deductions.</p>
             </div>
         @endif
 
@@ -146,8 +146,8 @@
                                         <label for="name">Employee's Salary Type:</label>
                                         <select class="form-control" name="new_salary_type" id="new_salary_type" required>
                                             <option disabled selected>--Choose Salary Type--</option>
-                                            <option value="FIXED">Fixed</option>
-                                            <option value="HOURLY">Hourly</option>
+                                            <option value="FIXED" {{ $user->salary_type=="FIXED"?'selected':""}}>FIXED</option> 
+                                            <option value="HOURLY" {{ $user->salary_type=="HOURLY"?'selected':""}}>HOURLY</option>                                            
                                         </select>
                                     </div>
                                     <div class="">
@@ -156,6 +156,7 @@
                                             <option value="">--Select Department--</option>
                                             @foreach ($showDep as $rowDep)
                                             <option value="{{$selectedDep=$rowDep->department_name}}">{{$rowDep->department_name}}</option>
+
                                             @endforeach
                                         </select>
                                     </div>
@@ -180,15 +181,15 @@
                                         <label for="inlineRadio1">Required Dayoff:</label>
 
                                         <select name="new_dayoff" id="new_dayoff" class="form-control" required>
-                                            <option disabled selected>--Select Dayoff--</option>
-                                            <option value="SUN">Sunday</option>
-                                            <option value="MON">Monday</option>
-                                            <option value="TUE">Tuesday</option>
-                                            <option value="WED">Wednesday</option>
-                                            <option value="THU">Thursday</option>
-                                            <option value="FRI">Friday</option>
-                                            <option value="SAT">Saturday</option>
-                                        </select>
+                                                <option disabled selected value="">--Select Dayoff--</option>
+                                                <option value="SUN" {{ $sched->dayoff=="SUN"?'selected':""}}>Sunday</option>
+                                                <option value="MON" {{ $sched->dayoff=="MON"?'selected':""}}>Monday</option>
+                                                <option value="TUE" {{ $sched->dayoff=="TUE"?'selected':""}}>Tuesday</option>
+                                                <option value="WED" {{ $sched->dayoff=="WED"?'selected':""}}>Wednesday</option>
+                                                <option value="THU" {{ $sched->dayoff=="THU"?'selected':""}}>Thursday</option>
+                                                <option value="FRI" {{ $sched->dayoff=="FRI"?'selected':""}}>Friday</option>
+                                                <option value="SAT" {{ $sched->dayoff=="SAT"?'selected':""}}>Saturday</option>
+                                            </select>
                                     </div>
                                     <div class="">
                                         <label for="name">Required Time-in</label>

@@ -99,6 +99,34 @@ $('#minus').on('show.bs.modal', function(event){
     modal.find('.modal-body #ded_item_id').val(itemid);
 });
 
+$('#edit_ca').on('show.bs.modal', function(event){
+    var button = $(event.relatedTarget)
+    var id = button.data('id')
+    var name = button.data('name')
+    var request = button.data('request')
+    var deduction = button.data('ded')
+    console.log(name + " " + request  + " " + deduction);
+    var modal = $(this)
+    modal.find('.modal-body #deduction').val(deduction);
+    modal.find('.modal-body #request').val(request);
+    modal.find('.modal-body #myid').val(id);
+
+});
+
+$('#del_ca').on('show.bs.modal', function(event){
+    var button = $(event.relatedTarget)
+    var id = button.data('id')
+    var name = button.data('name')
+    var modal = $(this)
+
+    modal.find('.modal-body #myid').val(id);
+    modal.find('.modal-body #myname').val(id);
+    document.getElementById('del_myname').innerHTML = name + "?";
+
+
+});
+
+
 $('#add').on('show.bs.modal', function(event){
     var button = $(event.relatedTarget)
     var name = button.data('myitemadd')
@@ -229,6 +257,21 @@ $(document).ready(function() {
         $('#new_timein').prop('required','');
         $('#new_timeout').prop('required','');
     }
+
+
+    // alert("YO");
+    var salx = $("#salary_type").val();
+    if(salx=="HOURLY"){
+        $("#div_salary").show();
+        $('#timein').prop('required','required');
+        $('#timeout').prop('required','required');
+        $('#dayoff').prop('required','required');
+    }else if(salx=="FIXED"){
+        $("#div_salary").hide();
+        $('#timein').prop('required','');
+        $('#timeout').prop('required','');
+        $('#dayoff').prop('required','');
+    }
 });
 
 $('.table tbody').on('click','.btn',function(){
@@ -299,6 +342,25 @@ $("#new_salary_type").change(function(){
         $("#schedule").hide();
         $('#new_timein').prop('required','');
         $('#new_timeout').prop('required','');
+    }
+});
+
+
+
+$("#salary_type").change(function(){
+    // alert("YO");
+    var sal = $("#salary_type").val();
+    if(sal=="HOURLY"){
+        $("#div_salary").show();
+        $('#timein').prop('required','required');
+        $('#timeout').prop('required','required');
+        $('#dayoff').prop('required','required');
+
+    }else if(sal=="FIXED"){
+        $("#div_salary").hide();
+        $('#timein').prop('required','');
+        $('#timeout').prop('required','');
+        $('#dayoff').prop('required','');
     }
 });
 

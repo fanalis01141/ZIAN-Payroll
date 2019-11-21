@@ -19,7 +19,7 @@ class CreateCashadvancesTable extends Migration
             $table->string('reason');
             $table->integer('request');
             $table->integer('ded_per_pay');
-            $table->integer('months_to_pay');
+            $table->integer('months_to_pay')->nullable();
             $table->string('date_issued');
             $table->timestamps();
         });

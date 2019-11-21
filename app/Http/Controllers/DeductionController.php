@@ -110,7 +110,7 @@ class DeductionController extends Controller
         $data['users'] = User::where('priority','LO')->where('active', 1)->get();
         $data['CA'] = CashAdvance::where('request','!=', 0)->get();
         $data['tables'] = DB::table('users')->select([
-                        'users.name', 'cashadvances.request', 'cashadvances.ded_per_pay', 'cashadvances.months_to_pay','cashadvances.date_issued'
+                        'users.name', 'cashadvances.request','cashadvances.emp_id', 'cashadvances.ded_per_pay', 'cashadvances.months_to_pay','cashadvances.date_issued'
                         ])->join('cashadvances','cashadvances.emp_id','=','users.id')->where('active', 1)
                         ->get();
 
@@ -134,7 +134,6 @@ class DeductionController extends Controller
                 'request' => $request->get('request'),
                 'ded_per_pay' => $request->get('ded_per_pay'),
                 'date_issued' => $request->get('date_issued'),
-                'months_to_pay' => $request->get('months_to_pay')
             ]);
             return redirect()->back()->with('success', 'Registered ' . $request->get('request') . ' Cash Advance to: ' . $user->name);
         }else{
@@ -144,10 +143,29 @@ class DeductionController extends Controller
                 'request' => $new_amount,
                 'date_issued' => $request->get('date_issued'),
                 'ded_per_pay' => $request->get('ded_per_pay'),
-                'months_to_pay' => $request->get('months_to_pay')
             ]);
-            return redirect()->back()->with('success', 'Updated' . $request->get('request') . ' Cash Advance to: ' . $user->name);
+            return redirect()->back()->with('success', 'Updated ' . $request->get('request') . ' Cash Advance to: ' . $user->name);
 
         }
+    }
+
+    public function editCA(Request $req, $id){
+        // return $req;
+        CashAdvance::where('emp_id',$req->myid)->update([
+            'request' => $req->get('request'),
+            'ded_per_pay' => $req->get('deduction')
+        ]);
+        return redirect()->back()->with('success','Edit succesful.');
+    }
+
+    public function deleteCA(Request $req){
+        // return $req;
+        CashAdvance::where('emp_id', $req->myid)->delete();
+        $user = User::find($req->myid);
+        // return $user;
+        
+
+        return redirect()->back()->with('success', 'Deleted cash advance record of ' . $user->name);
+
     }
 }

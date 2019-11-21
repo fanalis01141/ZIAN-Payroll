@@ -34,7 +34,7 @@
 
                     {{-- Employee table --}}
 
-                    <table class="table table-hover">
+                    <table class="table table-hover table-striped table-bordered text-center">
                         <thead class="text-secondary">
                             <tr>
                                 <th scope="col">Employee Name</th>
@@ -178,7 +178,7 @@
                         <div class="alert alert-warning text-center font-weight-bold" style="display:none">
                             <i class="fas fa-exclamation-triangle mr-3"></i>Please double check the required time-in and required time-out of the Employee.
                         </div>
-                        <div class="row mt-3 row-timein" style="display:none">
+                        <div class="row mt-3 row-timein" style="display:none" id="div_salary">
                             <div class="col-md-4">
                                 <label for="dayoff">ENTER DAY OFF:</label>
                                 <select name="dayoff" id="dayoff" class="form-control" required>
@@ -195,12 +195,12 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="timein">TIME IN:</label>
-                                <input type="text" class="timepicker form-control" id="timein" name="timein">
+                                <input type="text" class="timepicker form-control" id="timein" name="timein" required>
                             </div>
 
                             <div class="col-md-4">
                                 <label for="timein">TIME OUT:</label>
-                                <input type="text" class="timepicker form-control" id="timeout" name="timeout">
+                                <input type="text" class="timepicker form-control" id="timeout" name="timeout" required>
                             </div>
                         </div>
 

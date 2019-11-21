@@ -19,7 +19,7 @@
             <div class="card shadow">
                 <h5 class="card-header bg-dark text-light">Deductions</h5>
                 <div class="card-body">
-                    <table class="table table-hover">
+                    <table class="table table-hover table-bordered table-striped">
                     <thead>
                         <tr>
                         <th scope="col">Employee</th>

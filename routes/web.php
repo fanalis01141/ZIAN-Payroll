@@ -60,6 +60,10 @@ Route::group(['middleware' => ['auth' , 'admin']], function () {
     Route::get('/employee/{id}/accountability', 'PivotController@accountability')->name('employee.accountability');
     Route::get('/cash-advance', 'DeductionController@showCA')->name('ded.showCA');
     Route::get('/cash-advance/{id}', 'DeductionController@storeCA')->name('ded.storeCA');
+    Route::post('/cash-advance-edit/{id}', 'DeductionController@editCA')->name('ded.editCA');
+    Route::post('/cash-advance-delete/{id}', 'DeductionController@deleteCA')->name('ded.delCA');
+
+
     Route::get('/homedashboard', 'HomeController@homedashboard')->name('homedashboard');
 
     Route::get('/employees', 'HomeController@dashboard')->name('dashboard');
